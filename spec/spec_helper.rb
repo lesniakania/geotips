@@ -1,24 +1,29 @@
 require 'rspec/autorun'
 
-require 'spec_helper_light'
+require 'rack'
+require 'rack/test'
+require 'raptor'
 
-# Requires supporting ruby files with custom matchers and macros, etc,
-# in spec/support/ and its subdirectories.
-Dir[Rails.root.join("spec/support/**/*.rb")].each {|f| require f}
+require_relative '../app'
 
-RSpec.configure do |config|
-  # ## Mock Framework
-  #
-  # If you prefer to use mocha, flexmock or RR, uncomment the appropriate line:
-  #
-  # config.mock_with :mocha
-  # config.mock_with :flexmock
-  # config.mock_with :rr
+def env(method, path, body="")
+  {'REQUEST_METHOD' => method,
+   'PATH_INFO' => path,
+   'rack.input' => body}
+end
 
-  # If true, the base class of anonymous controllers will be inferred
-  # automatically. This will be the default behavior in future versions of
-  # rspec-rails.
-  config.infer_base_class_for_anonymous_controllers = false
+def request(method, path, body="")
+  Rack::Request.new(env(method, path, body))
+end
 
-  config.treat_symbols_as_metadata_keys_with_true_values = true
+def params(hash)
+  hash.to_json
+end
+
+def app
+  App
+end
+
+def json_body
+  JSON.parse(last_response.body)
 end

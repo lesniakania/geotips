@@ -73,6 +73,7 @@ DEPENDENCIES
   capybara
   cucumber
   cucumber-websteps
+  rack-test
   raptor!
   rspec
   thin
