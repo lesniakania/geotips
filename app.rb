@@ -2,4 +2,6 @@
 
 require 'raptor'
 
-App = Raptor::App.new([])
+require_relative './lib/tips.rb'
+
+App = Raptor::App.new([Tips])
