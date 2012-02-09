@@ -9,6 +9,9 @@ GEM
   remote: http://rubygems.org/
   specs:
     addressable (2.2.6)
+    bson (1.5.2)
+    bson_ext (1.5.2)
+      bson (= 1.5.2)
     builder (3.0.0)
     capybara (1.1.2)
       mime-types (>= 1.16)
@@ -39,6 +42,8 @@ GEM
     launchy (2.0.5)
       addressable (~> 2.2.6)
     mime-types (1.17.2)
+    mongo (1.5.2)
+      bson (= 1.5.2)
     multi_json (1.0.4)
     nokogiri (1.5.0)
     rack (1.4.1)
@@ -70,9 +75,11 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  bson_ext
   capybara
   cucumber
   cucumber-websteps
+  mongo
   rack-test
   raptor!
   rspec

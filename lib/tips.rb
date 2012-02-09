@@ -11,7 +11,7 @@ module Tips
 
   class PresentsMany
     def all
-      Record.all.map{ |r| PresentsOne.new(r).attributes }
+      Record.all.map{ |r| r.attributes }
     end
   end
 
@@ -19,7 +19,7 @@ module Tips
     takes :record
 
     def attributes
-      {content: @record.content}
+      @record.attributes
     end
   end
 
@@ -33,19 +33,43 @@ module Tips
     end
   end
 
+  module RecordsDb
+    def insert(hash)
+      connection.insert(hash).to_s
+    end
+
+    def all
+      connection.find
+    end
+
+    def delete_all
+      connection.remove
+    end
+
+    private
+
+    def connection
+      @connection ||= Mongo::Connection.new['geotips']['tips']
+    end
+
+    extend self
+  end
+
   class Record
     attr_reader :content
+    attr_accessor :id
 
     def initialize(params = {})
       @content = params.fetch('content')
     end
 
-    def id
-      1
+    def attributes
+      {content: content}
     end
 
     def self.create(params = {})
       record = Record.new(params)
+      record.id = RecordsDb.insert(record.attributes)
       all << record
       record
     end
