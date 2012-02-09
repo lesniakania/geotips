@@ -2,8 +2,11 @@ module Tips
 
   def self.routes
     Raptor.routes(self) do
-      root :text => ""
+      root :render => "root", :present => :many
     end
+  end
+
+  class PresentsMany
   end
 
 end
