@@ -3,6 +3,7 @@
 require 'raptor'
 require 'json'
 require 'mongo'
+require 'rack/coffee'
 
 require_relative './lib/tips.rb'
 

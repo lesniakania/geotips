@@ -2,10 +2,10 @@ module Tips
 
   def self.routes
     Raptor.routes(self) do
-      root :render => "new", :present => :one
-      create :redirect => nil, :present => :one, :render => 'tip', :to => 'Tips::JSONParser.create'
+      root :render => "root", :present => :many
+      create :redirect => nil, :present => :one, :render => 'show', :to => 'Tips::JSONParser.create'
       show
-      index :render => 'tips'
+      index
     end
   end
 

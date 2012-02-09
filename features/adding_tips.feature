@@ -1,3 +1,4 @@
+@javascript
 Feature: Adding tips
 
   Scenario: Posting a new tip
