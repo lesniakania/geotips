@@ -2,7 +2,9 @@ module Tips
 
   def self.routes
     Raptor.routes(self) do
-      root :render => "new", :present => :one
+      root :render => "tips/index", :present => :many
+      index
+      new
     end
   end
 
@@ -10,6 +12,11 @@ module Tips
   end
 
   class PresentsOne
+  end
+
+  class Record
+    def self.all
+    end
   end
 
 end
