@@ -1,1 +1,4 @@
 .rvmrc
+*.sw[a-z]
+/bin/
+.bundle
