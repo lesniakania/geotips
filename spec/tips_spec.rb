@@ -12,7 +12,6 @@ describe Tips do
     end
 
     it 'responds with 201' do
-      pending('todo')
       last_response.status.should == 201
     end
 

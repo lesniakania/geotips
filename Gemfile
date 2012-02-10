@@ -1,6 +1,6 @@
 source :rubygems
 
-gem 'raptor', :git => "https://github.com/garybernhardt/raptor.git"
+gem 'raptor', :git => "https://github.com/obrok/raptor.git"
 gem 'rack-coffee'
 gem 'thin'
 

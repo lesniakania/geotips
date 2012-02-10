@@ -1,6 +1,6 @@
 GIT
-  remote: https://github.com/garybernhardt/raptor.git
-  revision: 17c9703312b449e4e0492462a8e5ca0cb7aeca7a
+  remote: https://github.com/obrok/raptor.git
+  revision: c77002ec93e452572fe1c076ddbb549b40b585ee
   specs:
     raptor (0.0.1)
       rack

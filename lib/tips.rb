@@ -1,17 +1,37 @@
 module Tips
-
   def self.routes
     Raptor.routes(self) do
       root :render => "root", :present => :many
-      create :redirect => nil, :present => :one, :render => 'show', :to => 'Tips::JSONParser.create'
+      create :responder => JSONResponder, :present => :one, :to => 'Tips::JSONParser.create'
       show
-      index
+      index :responder => JSONResponder
+    end
+  end
+
+  class JSONResponder
+    def initialize(resource, action, params)
+      @resource = resource
+      @action = action
+      @presenter_name = params[:present]
+    end
+
+    def respond(record, injector)
+      injector = injector.add_record(record)
+      presenter_class = @resource.send("#{@presenter_name}_presenter")
+      presenter = injector.call(presenter_class.method(:new))
+
+      status = @action == :create ? 201 : 200
+      Rack::Response.new(presenter.to_json, status, {"Content-Type" => "application/json"})
     end
   end
 
   class PresentsMany
     def all
       Record.all.map{ |r| r.attributes }
+    end
+
+    def to_json
+      all.to_json
     end
   end
 
